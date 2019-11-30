@@ -132,6 +132,14 @@ Future<List<Account>> _getAllAccount(Database db) async {
   }).toList();
 }
 
+Future _updateAccount(Database db, int id, String name, int age) async {
+  var values = <String, dynamic>{
+    "name": name,
+    "age": age,
+  };
+  await db.update("account", values, where: "_id=?", whereArgs: [id]);
+}
+
 Future _deleteAccount(Database db, Account account) async {
   await db.delete("account", where: "_id=?", whereArgs: [account.id]);
 }
